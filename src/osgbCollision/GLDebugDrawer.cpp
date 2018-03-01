@@ -25,8 +25,9 @@
 #include <osg/Camera>
 #include <osg/Geometry>
 #include <osg/Point>
+#ifndef IM_OSG_SIZE_REDUCTION
 #include <osgText/Text>
-
+#endif
 #include <iostream>
 
 #include <stdio.h> //printf debugging
@@ -105,13 +106,13 @@ GLDebugDrawer::GLDebugDrawer()
     _triGeom->setColorArray( _triColors );
     _triGeom->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
 
-
+#ifndef IM_OSG_SIZE_REDUCTION
     // Initialize _textVec to display 10 text strings; resize later if necessary
     _textVec.resize( 10 );
     int idx;
     for( idx=0; idx<10; idx++ )
         _textVec[ idx ] = initText();
-
+#endif
 
     // Set up for HUD
     _hudCam = new osg::Camera;
@@ -246,7 +247,8 @@ void GLDebugDrawer::draw3dText(const btVector3& location,const char* textString)
         osg::notify( osg::WARN ) << "GLDebugDrawer: BeginDraw was not called." << std::endl;
         return;
     }
-
+  
+#ifndef IM_OSG_SIZE_REDUCTION
     if( _textStrings == _textVec.size() )
     {
         int oldSize( _textVec.size() );
@@ -263,6 +265,7 @@ void GLDebugDrawer::draw3dText(const btVector3& location,const char* textString)
     text->setText( std::string( textString ) );
 
     _geode->addDrawable( text );
+#endif
 }
 ////////////////////////////////////////////////////////////////////////////////
 void GLDebugDrawer::reportErrorWarning(const char* warningString)
@@ -374,6 +377,7 @@ float GLDebugDrawer::getTextSize() const
     return( _textSize );
 }
 
+#ifndef IM_OSG_SIZE_REDUCTION
 osgText::Text*
 GLDebugDrawer::initText()
 {
@@ -388,7 +392,7 @@ GLDebugDrawer::initText()
     //return( text.release() );
     return text;
 }
-
+#endif
 
 // osgbCollision
 }

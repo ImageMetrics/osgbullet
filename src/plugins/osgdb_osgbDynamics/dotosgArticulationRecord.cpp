@@ -31,6 +31,7 @@
 
 
 bool Articulation_readLocalData( osg::Object& obj, osgDB::Input& fr );
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool Articulation_writeLocalData( const osg::Object& obj, osgDB::Output& fw );
 
 osgDB::RegisterDotOsgWrapperProxy Articulation_Proxy
@@ -41,7 +42,16 @@ osgDB::RegisterDotOsgWrapperProxy Articulation_Proxy
     Articulation_readLocalData,
     Articulation_writeLocalData
 );
-
+#else
+osgDB::RegisterDotOsgWrapperProxy Articulation_Proxy
+(
+     new osgbInteraction::ArticulationRecord,
+     "ArticulationRecord",
+     "Object ArticulationRecord",
+     Articulation_readLocalData,
+     NULL
+ );
+#endif
 
 
 
@@ -80,6 +90,7 @@ bool Articulation_readLocalData( osg::Object& obj, osgDB::Input& fr )
     return( advance );
 }
 
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool Articulation_writeLocalData( const osg::Object& obj, osgDB::Output& fw )
 {
     const osgbInteraction::ArticulationRecord& ar = static_cast< const osgbInteraction::ArticulationRecord& >( obj );
@@ -90,3 +101,4 @@ bool Articulation_writeLocalData( const osg::Object& obj, osgDB::Output& fw )
 
     return( true );
 }
+#endif

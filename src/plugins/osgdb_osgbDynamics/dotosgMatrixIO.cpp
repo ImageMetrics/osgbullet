@@ -60,7 +60,7 @@ bool readMatrix( osg::Matrix& matrix, osgDB::Input& fr, const char* keyword )
         
     return iteratorAdvanced;
 }
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool writeMatrix( const osg::Matrix& matrix, osgDB::Output& fw, const char* keyword )
 {
     std::streamsize oldPrec = fw.precision( 20 );
@@ -78,4 +78,4 @@ bool writeMatrix( const osg::Matrix& matrix, osgDB::Output& fw, const char* keyw
 
     return true;
 }
-
+#endif

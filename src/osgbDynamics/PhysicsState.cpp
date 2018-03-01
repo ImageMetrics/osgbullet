@@ -175,6 +175,7 @@ unsigned int PhysicsState::getNumEntries() const
 {
     return( _dataMap.size() );
 }
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 void PhysicsState::exportEntired( osgDB::Output& out ) const
 {
     DataMap::const_iterator it;
@@ -185,7 +186,7 @@ void PhysicsState::exportEntired( osgDB::Output& out ) const
         out.writeObject( *( it->second ) );
     }
 }
-
+#endif
 const PhysicsData* PhysicsState::getPhysicsData( const osgwTools::RefID* id ) const
 {
     return( getPhysicsData( id->str() ) );

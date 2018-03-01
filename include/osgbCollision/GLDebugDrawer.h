@@ -30,8 +30,9 @@
 #include <osg/Geode>
 #include <osg/Geometry>
 #include <osg/Camera>
+#ifndef IM_OSG_SIZE_REDUCTION
 #include <osgText/Text>
-
+#endif
 
 
 namespace osgbCollision
@@ -73,8 +74,9 @@ public:
     float getTextSize() const;
 
 private:
+#ifndef IM_OSG_SIZE_REDUCTION
     osgText::Text* initText();
-
+#endif
 	int _debugMode;
     bool _enabled;
     bool _active;
@@ -87,9 +89,10 @@ private:
     osg::ref_ptr< osg::Geometry > _ptGeom;
     osg::ref_ptr< osg::Geometry > _lnGeom;
     osg::ref_ptr< osg::Geometry > _triGeom;
-
+#ifndef IM_OSG_SIZE_REDUCTION
     typedef std::vector< osg::ref_ptr< osgText::Text > > TextVec;
     TextVec _textVec;
+#endif
     unsigned int _textStrings;
 
     osg::Vec3Array* _ptVerts;

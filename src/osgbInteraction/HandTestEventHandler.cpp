@@ -76,7 +76,9 @@ HandTestEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAction
             }
             else if (ea.getKey()==osgGA::GUIEventAdapter::KEY_Delete)
             {
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
                 _hand->dump();
+#endif
                 return true;
             }
             else if (ea.getKey()==osgGA::GUIEventAdapter::KEY_F1)
@@ -366,7 +368,9 @@ VirtualHandTestEventHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GU
             }
             else if (ea.getKey()==osgGA::GUIEventAdapter::KEY_Delete)
             {
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
                 _hand->dump();
+#endif
                 return true;
             }
             else if( ea.getKey() == '=' )

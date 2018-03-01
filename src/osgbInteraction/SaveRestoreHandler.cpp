@@ -73,7 +73,9 @@ bool SaveRestoreHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAct
     }
     else if( ea.getKey() == osgGA::GUIEventAdapter::KEY_F1 )
     {
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
         save();
+#endif
         return( true );
     }
     else if( ea.getKey() == osgGA::GUIEventAdapter::KEY_F2 )
@@ -83,7 +85,9 @@ bool SaveRestoreHandler::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIAct
         capture();
         if( _pt != NULL )
             _pt->pause( false );
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
         save();
+#endif
         return( true );
     }
     return( false );
@@ -153,7 +157,7 @@ std::string SaveRestoreHandler::getSaveRestoreFileName() const
 {
     return( _fileName );
 }
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 void SaveRestoreHandler::save( const std::string& fileName )
 {
     std::string fName( fileName );
@@ -162,7 +166,7 @@ void SaveRestoreHandler::save( const std::string& fileName )
 
     osgDB::writeObjectFile( *_state, fName );
 }
-
+#endif
 void SaveRestoreHandler::restore( const std::string& fileName )
 {
     osg::notify( osg::WARN ) << "SaveRestoreHandler::restore() not currently implemented." << std::endl;

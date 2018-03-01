@@ -249,11 +249,11 @@ public:
     };
 
     void setPose( Pose pose, float radiansPerSec=(float)(osg::PI) );
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
     // Dumps OSG files for children, and displays info to std::out
     //   including the current PAT matrix and the articulation angles.
     void dump() const;
-
+#endif
 
     //
     // Made public for the benefit of helper NodeVisitors.
@@ -281,9 +281,9 @@ public:
 
         ArticulationInfo* _dependent;
         btCompoundShape* _cs;
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
         void dump() const;
-
+#endif
         bool _valid;
     };
     typedef std::vector< ArticulationInfo > ArticulationInfoList;

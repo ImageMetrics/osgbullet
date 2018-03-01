@@ -31,6 +31,7 @@
 
 
 bool Creation_readLocalData( osg::Object& obj, osgDB::Input& fr );
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool Creation_writeLocalData( const osg::Object& obj, osgDB::Output& fw );
 
 osgDB::RegisterDotOsgWrapperProxy Creation_Proxy
@@ -41,6 +42,16 @@ osgDB::RegisterDotOsgWrapperProxy Creation_Proxy
     Creation_readLocalData,
     Creation_writeLocalData
 );
+#else
+osgDB::RegisterDotOsgWrapperProxy Creation_Proxy
+(
+    new osgbDynamics::CreationRecord,
+    "CreationRecord",
+    "Object CreationRecord",
+    Creation_readLocalData,
+    NULL
+);
+#endif
 
 
 
@@ -184,6 +195,7 @@ bool Creation_readLocalData( osg::Object& obj, osgDB::Input& fr )
     return( advance );
 }
 
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool Creation_writeLocalData( const osg::Object& obj, osgDB::Output& fw )
 {
     const osgbDynamics::CreationRecord& cr = static_cast< const osgbDynamics::CreationRecord& >( obj );
@@ -200,3 +212,4 @@ bool Creation_writeLocalData( const osg::Object& obj, osgDB::Output& fw )
 
     return( true );
 }
+#endif

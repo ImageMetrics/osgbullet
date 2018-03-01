@@ -108,7 +108,7 @@ ReaderWriterSGB::readObject( const std::string& fileName, const Options* options
 
     return( ps.release() );
 }
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 osgDB::ReaderWriter::WriteResult
 ReaderWriterSGB::writeObject( const osg::Object& obj, const std::string& fileName, const Options* options ) const
 {
@@ -126,6 +126,6 @@ ReaderWriterSGB::writeObject( const osg::Object& obj, const std::string& fileNam
 
     return( osgDB::ReaderWriter::WriteResult::FILE_SAVED );
 }
-
+#endif
 
 REGISTER_OSGPLUGIN( osgb, ReaderWriterSGB )

@@ -35,9 +35,9 @@
 // available in shared form in OSG itself.
 
 bool readMatrix( osg::Matrix& matrix, osgDB::Input& fr, const char* keyword="Matrix" );
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool writeMatrix( const osg::Matrix& matrix, osgDB::Output& fw, const char* keyword="Matrix" );
-
+#endif
 
 // __DOTOSG_OSGBDYNAMICS_MATRIX_IO_H__
 #endif

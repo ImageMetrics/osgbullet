@@ -119,11 +119,11 @@ public:
     */
     void setSaveRestoreFileName( const std::string& fileName );
     std::string getSaveRestoreFileName() const;
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
     /** \brief Save to disk.
     */
     void save( const std::string& fileName=std::string( "" ) );
-
+#endif
     /** \brief Restore from disk. Not currently implemented.
 
     Do not use this function. See saverestore for an example of restoreing

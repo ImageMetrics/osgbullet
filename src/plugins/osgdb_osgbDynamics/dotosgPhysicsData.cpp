@@ -37,6 +37,7 @@
 
 
 bool PhysicsData_readLocalData( osg::Object& obj, osgDB::Input& fr );
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool PhysicsData_writeLocalData( const osg::Object& obj, osgDB::Output& fw );
 
 osgDB::RegisterDotOsgWrapperProxy PhysicsData_Proxy
@@ -47,8 +48,16 @@ osgDB::RegisterDotOsgWrapperProxy PhysicsData_Proxy
     PhysicsData_readLocalData,
     PhysicsData_writeLocalData
 );
-
-
+#else
+osgDB::RegisterDotOsgWrapperProxy PhysicsData_Proxy
+(
+    new osgbDynamics::PhysicsData,
+    "PhysicsData",
+    "Object PhysicsData",
+    PhysicsData_readLocalData,
+    NULL
+);
+#endif
 
 
 bool PhysicsData_readLocalData( osg::Object& obj, osgDB::Input& fr )
@@ -123,7 +132,7 @@ bool PhysicsData_readLocalData( osg::Object& obj, osgDB::Input& fr )
     osg::notify( osg::INFO ) << "OSGB: advance " << advance << std::endl;
     return( advance );
 }
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 bool PhysicsData_writeLocalData( const osg::Object& obj, osgDB::Output& fw )
 {
     const osgbDynamics::PhysicsData& pd = static_cast< const osgbDynamics::PhysicsData& >( obj );
@@ -174,3 +183,4 @@ bool PhysicsData_writeLocalData( const osg::Object& obj, osgDB::Output& fw )
 
     return( true );
 }
+#endif

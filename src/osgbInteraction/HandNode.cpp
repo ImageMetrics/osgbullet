@@ -1591,6 +1591,7 @@ HandNode::ArticulationInfo::~ArticulationInfo()
 {
 }
 
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 void HandNode::ArticulationInfo::dump() const
 {
     osg::notify( osg::ALWAYS ) <<
@@ -1607,7 +1608,8 @@ void HandNode::ArticulationInfo::dump() const
     m = osg::computeLocalToWorld( _l2wNodePath );
     osg::notify( osg::ALWAYS ) << m << std::endl;
 }
-
+#endif
+  
 void HandNode::ArticulationInfo::setAngle( float angle )
 {
     if( !_mt.valid() )
@@ -1653,7 +1655,7 @@ void HandNode::ArticulationInfo::setBulletTransform()
 }
 
 
-
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
 void HandNode::dump() const
 {
     // Create OSG files of any child nodes and the hand subgraph.
@@ -1691,7 +1693,7 @@ void HandNode::dump() const
         getArticulation( 18 ) << ", " <<
         getArticulation( 19 ) << " // outer knuckle" << std::endl << std::endl;
 }
-
+#endif
 
 // osgbInteraction
 }

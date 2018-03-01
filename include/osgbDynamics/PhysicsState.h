@@ -119,8 +119,9 @@ public:
     void removePhysicsData( const std::string& id );
 
     typedef std::map< std::string, osg::ref_ptr< PhysicsData > > DataMap;
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
     void exportEntired( osgDB::Output& out ) const;
-
+#endif
     /** \brief Load current state from the physics simultation.
 
     This function calls PhysicsData::loadState() for each element of \c _dataMap.
