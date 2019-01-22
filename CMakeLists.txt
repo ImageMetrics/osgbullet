@@ -121,6 +121,12 @@ if( OSGBULLET_USE_DOUBLE_PRECISION )
     add_definitions( -DBT_USE_DOUBLE_PRECISION )
 endif()
 
+option( IM_SIZE_REDUCTION "Enable Image Metrics Size Reduction code" OFF )
+if( IM_OSG_SIZE_REDUCTION )
+    add_definitions( -DIM_OSG_SIZE_REDUCTION )
+    add_definitions( -DIM_OSG_NO_WRITE_SERIALIZATION )
+    add_definitions( -DIM_OSG_OPENGL_OPTIMIZATION )
+endif()
 
 option( OSGBULLET_P5_SUPPORT "Enable to include support for the P5 glove and build the related test code" OFF )
 if( OSGBULLET_P5_SUPPORT )
@@ -133,7 +139,7 @@ else()
 endif()
 
 
-INCLUDE_DIRECTORIES( 
+INCLUDE_DIRECTORIES(
     ${PROJECT_SOURCE_DIR}/include
     ${OSG_INCLUDE_DIRS}
     #${OSGWORKS_INCLUDE_DIR}
@@ -192,7 +198,7 @@ if( DOXYGEN_FOUND )
     if( DOXYGEN_DOT_PATH )
         set( HAVE_DOT "YES" )
     endif()
-    
+
     configure_file( ${PROJECT_SOURCE_DIR}/doc/doxyfile.cmake
         ${PROJECT_BINARY_DIR}/doc/doxyfile
     )
@@ -201,7 +207,7 @@ if( DOXYGEN_FOUND )
     )
 endif()
 
-# On windows provide the user with the pdb files 
+# On windows provide the user with the pdb files
 # for debugging if they are present
 if(MSVC)
     install(
@@ -250,12 +256,12 @@ include( CMakePackageConfigHelpers )
 #file(RELATIVE_PATH CONF_REL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
 #   "${CMAKE_INSTALL_PREFIX}/include")
 
-configure_package_config_file( 
+configure_package_config_file(
     osgBulletConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgBulletConfig.cmake
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PATH_VARS OSGBULLET_USE_DOUBLE_PRECISION )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgBulletConfig.cmake 
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgBulletConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/osgBulletConfigVersion.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}/UseosgBullet.cmake
         DESTINATION ${CMAKE_INSTALL_LIBDIR} )

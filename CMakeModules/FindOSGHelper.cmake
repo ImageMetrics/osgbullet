@@ -1,10 +1,12 @@
-if( DEFINED IM_OSG_SIZE_REDUCTION AND IM_OSG_SIZE_REDUCTION )
+if( IM_SIZE_REDUCTION )
+    message( STATUS "IM_SIZE_REDUCTION is defined!" )
     set( _osgComponents
         OpenThreads osg osgDB osgUtil osgGA osgViewer
     )
 else()
+    message( STATUS "IM_SIZE_REDUCTION is not defined" )
     set( _osgComponents
-        OpenThreads osg osgDB osgUtil osgGA osgText osgViewer osgShadow
+        OpenThreads osg osgDB osgUtil osgGA osgViewer osgText osgShadow
     )
 endif()
 
