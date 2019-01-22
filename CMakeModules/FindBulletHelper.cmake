@@ -21,7 +21,7 @@ macro( unFindBullet )
         unset( "${currentLib}_LIBRARIES" CACHE )
         unset( "${currentLib}_LIBRARY" CACHE )
         unset( "${currentLib}_LIBRARY_DEBUG" CACHE )
-    endforeach() 
+    endforeach()
 endmacro( unFindBullet )
 
 
@@ -38,18 +38,18 @@ set_property( CACHE BulletInstallType PROPERTY STRINGS "Default Installation" "A
 # to call unFindBullet() and force the stock Bullet script to search
 # again. To do this, we save the last set value of these variables
 # in the CMake cache as internal (hidden) variables.
-if( NOT DEFINED _lastBulletInstallType )
-    set( _lastBulletInstallType "empty" CACHE INTERNAL "" )
-endif()
-if( NOT DEFINED _lastBulletInstallLocation )
-    set( _lastBulletInstallLocation "empty" CACHE INTERNAL "" )
-endif()
-if( NOT DEFINED _lastBulletSourceRoot )
-    set( _lastBulletSourceRoot "empty" CACHE INTERNAL "" )
-endif()
-if( NOT DEFINED _lastBulletBuildRoot )
-    set( _lastBulletBuildRoot "empty" CACHE INTERNAL "" )
-endif()
+# if( NOT DEFINED _lastBulletInstallType )
+#     set( _lastBulletInstallType "empty" CACHE INTERNAL "" )
+# endif()
+# if( NOT DEFINED _lastBulletInstallLocation )
+#     set( _lastBulletInstallLocation "empty" CACHE INTERNAL "" )
+# endif()
+# if( NOT DEFINED _lastBulletSourceRoot )
+#     set( _lastBulletSourceRoot "empty" CACHE INTERNAL "" )
+# endif()
+# if( NOT DEFINED _lastBulletBuildRoot )
+#     set( _lastBulletBuildRoot "empty" CACHE INTERNAL "" )
+# endif()
 
 if( NOT DEFINED BulletInstallLocation )
     set( BulletInstallLocation "Please specify" )
@@ -65,26 +65,26 @@ endif()
 # If the user has changed the Bullet install type combo box
 # (or it's a clean cache), then set or unset the our related
 # Bullet directory search variables.
-if( NOT ( ${BulletInstallType} STREQUAL ${_lastBulletInstallType} ) )
-#    message( STATUS "NOT ( ${BulletInstallType} STREQUAL ${_lastBulletInstallType} )" )
+# if( NOT ( ${BulletInstallType} STREQUAL ${_lastBulletInstallType} ) )
+# #    message( STATUS "NOT ( ${BulletInstallType} STREQUAL ${_lastBulletInstallType} )" )
 
-    if( BulletInstallType STREQUAL "Default Installation" )
-        # Remove our helper variables and tell the stock script to search again.
-        unset( BulletInstallLocation CACHE )
-        unset( BulletSourceRoot CACHE )
-        unset( BulletBuildRoot CACHE )
-    elseif( BulletInstallType STREQUAL "Alternate Install Location" )
-        # Enable just the BulletInstallLocation helper variable.
-        set( BulletInstallLocation "Please specify" CACHE PATH "Root directory where Bullet is installed" )
-        unset( BulletSourceRoot CACHE )
-        unset( BulletBuildRoot CACHE )
-    elseif( BulletInstallType STREQUAL "Source And Build Tree" )
-        # Enable the BulletSourceRoot and BulletBuildRoot helper variables.
-        unset( BulletInstallLocation CACHE )
-        set( BulletSourceRoot "Please specify" CACHE PATH "Root directory of Bullet source tree" )
-        set( BulletBuildRoot "Please specify" CACHE PATH "Root directory of Bullet build tree" )
-    endif()
-endif()
+#     if( BulletInstallType STREQUAL "Default Installation" )
+#         # Remove our helper variables and tell the stock script to search again.
+#         unset( BulletInstallLocation CACHE )
+#         unset( BulletSourceRoot CACHE )
+#         unset( BulletBuildRoot CACHE )
+#     elseif( BulletInstallType STREQUAL "Alternate Install Location" )
+#         # Enable just the BulletInstallLocation helper variable.
+#         set( BulletInstallLocation "Please specify" CACHE PATH "Root directory where Bullet is installed" )
+#         unset( BulletSourceRoot CACHE )
+#         unset( BulletBuildRoot CACHE )
+#     elseif( BulletInstallType STREQUAL "Source And Build Tree" )
+#         # Enable the BulletSourceRoot and BulletBuildRoot helper variables.
+#         unset( BulletInstallLocation CACHE )
+#         set( BulletSourceRoot "Please specify" CACHE PATH "Root directory of Bullet source tree" )
+#         set( BulletBuildRoot "Please specify" CACHE PATH "Root directory of Bullet build tree" )
+#     endif()
+# endif()
 
 # Library suffix needed on Windows to find libraries in build tree.
 set( _bulletLibraryPathSuffix "" )
@@ -95,28 +95,28 @@ set( _bulletSourceSuffix "" )
 
 # Look for conditions that require us to find Bullet again.
 set( _needToFindBullet FALSE )
-if( BulletInstallType STREQUAL "Default Installation" )
-    if( NOT ( ${BulletInstallType} STREQUAL ${_lastBulletInstallType} ) )
-#        message( STATUS "Need to find: case A" )
-        set( _needToFindBullet TRUE )
-    endif()
-elseif( BulletInstallType STREQUAL "Alternate Install Location" )
-    if( NOT ( "${BulletInstallLocation}" STREQUAL "${_lastBulletInstallLocation}" ) )
-#        message( STATUS "Need to find: case B" )
-        set( _needToFindBullet TRUE )
-    endif()
-elseif( BulletInstallType STREQUAL "Source And Build Tree" )
-    if( ( NOT ( "${BulletSourceRoot}" STREQUAL "${_lastBulletSourceRoot}" ) ) OR
-        ( NOT ( "${BulletBuildRoot}" STREQUAL "${_lastBulletBuildRoot}" ) ) )
-#        message( STATUS "Need to find: cade C" )
-        set( _needToFindBullet TRUE )
-    endif()
-    set( _bulletSourceSuffix "/src" )
-    if( WIN32 )
-        set( _bulletLibraryPathSuffix "/lib/Release" )
-        set( _bulletLibraryPathSuffixDebug "/lib/Debug" )
-    endif()
-endif()
+# if( BulletInstallType STREQUAL "Default Installation" )
+#     if( NOT ( ${BulletInstallType} STREQUAL ${_lastBulletInstallType} ) )
+# #        message( STATUS "Need to find: case A" )
+#         set( _needToFindBullet TRUE )
+#     endif()
+# elseif( BulletInstallType STREQUAL "Alternate Install Location" )
+#     if( NOT ( "${BulletInstallLocation}" STREQUAL "${_lastBulletInstallLocation}" ) )
+# #        message( STATUS "Need to find: case B" )
+#         set( _needToFindBullet TRUE )
+#     endif()
+# elseif( BulletInstallType STREQUAL "Source And Build Tree" )
+#     if( ( NOT ( "${BulletSourceRoot}" STREQUAL "${_lastBulletSourceRoot}" ) ) OR
+#         ( NOT ( "${BulletBuildRoot}" STREQUAL "${_lastBulletBuildRoot}" ) ) )
+# #        message( STATUS "Need to find: cade C" )
+#         set( _needToFindBullet TRUE )
+#     endif()
+#     set( _bulletSourceSuffix "/src" )
+#     if( WIN32 )
+#         set( _bulletLibraryPathSuffix "/lib/Release" )
+#         set( _bulletLibraryPathSuffixDebug "/lib/Debug" )
+#     endif()
+# endif()
 if( _needToFindBullet )
     unFindBullet()
     set( _lastBulletInstallType ${BulletInstallType} CACHE INTERNAL "" FORCE )
@@ -172,7 +172,7 @@ if( _needToFindBullet AND BULLET_FOUND )
     message( STATUS "Testing Bullet for use of double precision..." )
     set( _result )
     set( _buildOut )
-    
+
     # Configure for the correct build type to allow successful VS 2010 links
     # if Bullet was built release-only.
     if( BULLET_DYNAMICS_LIBRARY )
@@ -180,7 +180,7 @@ if( _needToFindBullet AND BULLET_FOUND )
     else()
         set( CMAKE_TRY_COMPILE_CONFIGURATION Debug )
     endif()
-    
+
     try_compile( _result ${PROJECT_BINARY_DIR}
         ${PROJECT_SOURCE_DIR}/CMakeModules/bulletDoublePrecisionTest.cpp
         CMAKE_FLAGS
