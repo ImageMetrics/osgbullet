@@ -1,7 +1,12 @@
-
-set( _osgComponents
-    OpenThreads osg osgDB osgUtil osgGA osgText osgViewer osgShadow
-)
+if( DEFINED IM_OSG_SIZE_REDUCTION AND IM_OSG_SIZE_REDUCTION )
+    set( _osgComponents
+        OpenThreads osg osgDB osgUtil osgGA osgViewer
+    )
+else()
+    set( _osgComponents
+        OpenThreads osg osgDB osgUtil osgGA osgText osgViewer osgShadow
+    )
+endif()
 
 # Macro to force the stock FindOpenSceneGraph.cmake script to
 # search again for OSG.
@@ -14,7 +19,7 @@ macro( unFindOSG )
         unset( "${currentLib}_LIBRARIES" CACHE )
         unset( "${currentLib}_LIBRARY" CACHE )
         unset( "${currentLib}_LIBRARY_DEBUG" CACHE )
-    endforeach() 
+    endforeach()
 endmacro( unFindOSG )
 
 
