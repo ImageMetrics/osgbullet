@@ -31,18 +31,16 @@
 #include <osgDB/Output>
 
 bool Constraint_readLocalData( osg::Object& obj, osgDB::Input& fr );
-#ifndef IM_OSG_NO_WRITE_SERIALIZATION
-osgDB::RegisterDotOsgWrapperProxy Constraint_Proxy
-(
-     new osgbDynamics::Constraint,
-     "Constraint",
-     "Object Constraint",
-     Constraint_readLocalData,
-     Constraint_writeLocalData
- );
-#else
-bool Constraint_writeLocalData( const osg::Object& obj, osgDB::Output& fw );
 
+#ifndef IM_OSG_NO_WRITE_SERIALIZATION
+bool Constraint_writeLocalData(const osg::Object &obj, osgDB::Output &fw);
+osgDB::RegisterDotOsgWrapperProxy Constraint_Proxy(
+	new osgbDynamics::Constraint,
+	"Constraint",
+	"Object Constraint",
+	Constraint_readLocalData,
+	Constraint_writeLocalData);
+#else
 osgDB::RegisterDotOsgWrapperProxy Constraint_Proxy
 (
     new osgbDynamics::Constraint,
