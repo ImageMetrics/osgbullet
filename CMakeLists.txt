@@ -83,7 +83,7 @@ IF(APPLE)
         #set iphone arch and flags taken from http://sites.google.com/site/michaelsafyan/coding/resources/how-to-guides/cross-compile-for-the-iphone/how-to-cross-compile-for-the-iphone-using-cmake
         IF(OSG_BUILD_PLATFORM_IPHONE)
             SET(CMAKE_OSX_ARCHITECTURES "arm64;arm64e" CACHE STRING "Build architectures for iOS")
-            SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -miphoneos-version-min=5.1 -mno-thumb -pipe -no-cpp-precomp" CACHE STRING "Flags used by the compiler during all build types."
+            SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -miphoneos-version-min=5.1 -mno-thumb -pipe -no-cpp-precomp" CACHE STRING "Flags used by the compiler during all build types.")
         ELSE()
             #simulator uses i386 architectures
             SET(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Build architectures for iOS Simulator")
